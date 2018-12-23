@@ -1397,7 +1397,7 @@ namespace Test.Rename.Dll {
 			protected int i = 123;
 			public int Prop1 { get; set; }
 			public abstract int Prop2 { get; }
-			public abstract int Prop3 { set; }
+			public abstract int Prop3 { get; set; }
 			public virtual void meth1(int i) { }
 			public abstract void meth1(string s);
 		}

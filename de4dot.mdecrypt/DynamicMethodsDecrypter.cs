@@ -154,10 +154,12 @@ namespace de4dot.mdecrypt {
 		delegate int CallMethod(IntPtr compileMethod, IntPtr jitter, IntPtr comp, IntPtr info, uint flags, IntPtr nativeEntry, IntPtr nativeSizeOfCode);
 
 		public DecryptMethodsInfo DecryptMethodsInfo {
+			get => decryptMethodsInfo;
 			set => decryptMethodsInfo = value;
 		}
 
 		public unsafe Module Module {
+			get => moduleToDecrypt;
 			set {
 				if (moduleToDecrypt != null)
 					throw new ApplicationException("Module has already been initialized");

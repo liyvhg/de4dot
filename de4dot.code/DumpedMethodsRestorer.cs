@@ -30,6 +30,7 @@ namespace de4dot.code {
 		DumpedMethods dumpedMethods;
 
 		public ModuleDefMD Module {
+			get => module;
 			set => module = value;
 		}
 
