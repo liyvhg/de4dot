@@ -168,19 +168,45 @@ namespace de4dot.code.deobfuscators.CodeVeil {
 		public override string ToString() => $"char[]: Length: {data.Length}";
 	}
 
-	class IconResourceData : UserResourceData {
+	class IconResourceData : UserResourceData, IDisposable {
 		public static readonly string ReflectionTypeName = "System.Drawing.Icon,System.Drawing";
 		Icon icon;
 		public IconResourceData(UserResourceType type, byte[] data) : base(type) => icon = new Icon(new MemoryStream(data));
 		public override void WriteData(BinaryWriter writer, IFormatter formatter) => formatter.Serialize(writer.BaseStream, icon);
 		public override string ToString() => $"Icon: {icon}";
+
+		protected virtual void Dispose(bool disposing) {
+			if (disposing) {
+				// dispose managed resources
+				icon.Dispose();
+			}
+			// free native resources
+		}
+
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
 	}
 
-	class ImageResourceData : UserResourceData {
+	class ImageResourceData : UserResourceData, IDisposable {
 		public static readonly string ReflectionTypeName = "System.Drawing.Bitmap,System.Drawing";
 		Bitmap bitmap;
 		public ImageResourceData(UserResourceType type, byte[] data) : base(type) => bitmap = new Bitmap(Image.FromStream(new MemoryStream(data)));
 		public override void WriteData(BinaryWriter writer, IFormatter formatter) => formatter.Serialize(writer.BaseStream, bitmap);
 		public override string ToString() => "Bitmap";
+
+		protected virtual void Dispose(bool disposing) {
+			if (disposing) {
+				// dispose managed resources
+				bitmap.Dispose();
+			}
+			// free native resources
+		}
+
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
 	}
 }

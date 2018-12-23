@@ -23,7 +23,7 @@ using dnlib.PE;
 using dnlib.DotNet;
 
 namespace de4dot.code.deobfuscators.dotNET_Reactor.v4 {
-	class NativeImageUnpacker {
+	class NativeImageUnpacker : IDisposable {
 		MyPEImage peImage;
 		bool isNet1x;
 		const int loaderHeaderSizeV45 = 14;
@@ -148,5 +148,18 @@ namespace de4dot.code.deobfuscators.dotNET_Reactor.v4 {
 				peImage.OffsetReadByte(baseOffset + 0x98),
 				peImage.OffsetReadByte(baseOffset + 0xA6),
 			};
+
+		protected virtual void Dispose(bool disposing) {
+			if (disposing) {
+				// dispose managed resources
+				peImage.Dispose();
+			}
+			// free native resources
+		}
+
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
 	}
 }

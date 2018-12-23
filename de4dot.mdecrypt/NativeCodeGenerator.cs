@@ -22,7 +22,10 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace de4dot.mdecrypt {
+#pragma warning disable CA1001 // Types that own disposable fields should be disposable
+	// MemoryStream Class does not actually have any resources to dispose.
 	class NativeCodeGenerator {
+#pragma warning restore CA1001 // Types that own disposable fields should be disposable
 		MemoryStream memStream;
 		BinaryWriter writer;
 		Dictionary<int, IntPtr> offsetToBranchAddr = new Dictionary<int, IntPtr>();

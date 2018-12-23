@@ -22,7 +22,7 @@ using System.Reflection;
 using System.Threading;
 
 namespace AssemblyData {
-	public abstract class AssemblyService : MarshalByRefObject, IAssemblyService {
+	public abstract class AssemblyService : MarshalByRefObject, IAssemblyService, IDisposable {
 		ManualResetEvent exitEvent = new ManualResetEvent(false);
 		protected Assembly assembly = null;
 		AssemblyResolver assemblyResolver = new AssemblyResolver();
@@ -78,6 +78,19 @@ namespace AssemblyData {
 			catch (BadImageFormatException ex) {
 				throw new ApplicationException($"Could not load assembly {filename}. Maybe it's 32-bit or 64-bit only?", ex);
 			}
+		}
+
+		protected virtual void Dispose(bool disposing) {
+			if (disposing) {
+				// dispose managed resources
+				exitEvent.Close();
+			}
+			// free native resources
+		}
+
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 	}
 }

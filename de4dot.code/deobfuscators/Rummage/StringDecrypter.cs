@@ -38,7 +38,7 @@ namespace de4dot.code.deobfuscators.Rummage {
 			string Decrypt(int stringId);
 		}
 
-		abstract class DecrypterBaseV11 : IDecrypter {
+		abstract class DecrypterBaseV11 : IDecrypter, IDisposable {
 			RummageVersion version;
 			MethodDef decrypterMethod;
 			protected int fileDispl;
@@ -99,6 +99,19 @@ namespace de4dot.code.deobfuscators.Rummage {
 				var utf8 = new byte[utf8Length];
 				Buffer.BlockCopy(decrypted, 0, utf8, 0, utf8.Length);
 				return Encoding.UTF8.GetString(utf8);
+			}
+
+			protected virtual void Dispose(bool disposing) {
+				if (disposing) {
+					// dispose managed resources
+					reader.Close();
+				}
+				// free native resources
+			}
+
+			public void Dispose() {
+				Dispose(true);
+				GC.SuppressFinalize(this);
 			}
 		}
 

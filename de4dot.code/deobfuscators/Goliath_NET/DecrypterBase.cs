@@ -25,7 +25,7 @@ using dnlib.DotNet.Emit;
 using de4dot.blocks;
 
 namespace de4dot.code.deobfuscators.Goliath_NET {
-	abstract class DecrypterBase {
+	abstract class DecrypterBase : IDisposable {
 		protected ModuleDefMD module;
 		EmbeddedResource encryptedResource;
 		TypeDef decrypterType;
@@ -278,6 +278,19 @@ namespace de4dot.code.deobfuscators.Goliath_NET {
 			foreach (var info in decrypterMethods.GetValues())
 				list.Add(info.method);
 			return list;
+		}
+
+		protected virtual void Dispose(bool disposing) {
+			if (disposing) {
+				// dispose managed resources
+				decryptedReader.Close();
+			}
+			// free native resources
+		}
+
+		public void Dispose() {
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 	}
 }
