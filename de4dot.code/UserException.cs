@@ -28,5 +28,8 @@ namespace de4dot.code {
 		public UserException(string message, Exception innerException)
 			: base(message, innerException) {
 		}
+
+		public UserException() {
+		}
 	}
 }

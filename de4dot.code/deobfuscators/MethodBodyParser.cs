@@ -35,6 +35,9 @@ namespace de4dot.code.deobfuscators {
 		protected InvalidMethodBody(SerializationInfo serializationInfo, StreamingContext streamingContext) {
 			throw new NotImplementedException();
 		}
+
+		public InvalidMethodBody(string message, Exception innerException) : base(message, innerException) {
+		}
 	}
 
 	public class MethodBodyHeader {

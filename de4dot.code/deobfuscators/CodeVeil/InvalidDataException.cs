@@ -25,5 +25,11 @@ namespace de4dot.code.deobfuscators.CodeVeil {
 		public InvalidDataException(string msg)
 			: base(msg) {
 		}
+
+		public InvalidDataException() {
+		}
+
+		public InvalidDataException(string message, Exception innerException) : base(message, innerException) {
+		}
 	}
 }

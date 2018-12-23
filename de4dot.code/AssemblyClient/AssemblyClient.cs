@@ -26,6 +26,14 @@ using AssemblyData;
 #if !NET35 && !NET472
 namespace System.Runtime.Remoting {
 	class RemotingException : SystemException {
+		public RemotingException() {
+		}
+
+		public RemotingException(string message) : base(message) {
+		}
+
+		public RemotingException(string message, Exception innerException) : base(message, innerException) {
+		}
 	}
 }
 #endif

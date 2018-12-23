@@ -30,6 +30,15 @@ namespace de4dot.cui {
 	class ExitException : Exception {
 		public readonly int code;
 		public ExitException(int code) => this.code = code;
+
+		public ExitException() {
+		}
+
+		public ExitException(string message) : base(message) {
+		}
+
+		public ExitException(string message, Exception innerException) : base(message, innerException) {
+		}
 	}
 
 	class Program {
