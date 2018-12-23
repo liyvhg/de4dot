@@ -20,8 +20,7 @@
 using System;
 
 namespace AssemblyData {
-	// The attribute is valid for type-level targets.
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Delegate)]
+	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
 	public class CreateUserGenericServiceAttribute : Attribute {
 	}
 
