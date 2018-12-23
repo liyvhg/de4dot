@@ -18,7 +18,7 @@
 */
 
 namespace de4dot.blocks.cflow {
-	public enum ValueType : byte {
+	public enum ValueType : int {
 		Unknown,
 		Null,
 		Object,

@@ -22,7 +22,7 @@ using dnlib.DotNet;
 
 namespace de4dot.code.deobfuscators {
 	[Flags]
-	public enum SimpleDeobfuscatorFlags : uint {
+	public enum SimpleDeobfuscatorFlags : int {
 		Force											= 0x00000001,
 
 		// Hack for Confuser deobfuscator code. That code was written before the
