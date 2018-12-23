@@ -33,7 +33,7 @@ using de4dot.code.AssemblyClient;
 using de4dot.code.renamer;
 
 namespace de4dot.code {
-	public class ObfuscatedFile : IObfuscatedFile, IDeobfuscatedFile {
+	public sealed class ObfuscatedFile : IObfuscatedFile, IDeobfuscatedFile {
 		Options options;
 		ModuleDefMD module;
 		IDeobfuscator deob;
@@ -776,27 +776,18 @@ namespace de4dot.code {
 
 		public void Dispose() {
 			DeobfuscateCleanUp();
-			ModuleDispose(true);
-			DeobDispose(true);
+
+			if (module != null) {
+				module.Dispose();
+				module = null;
+			}
+
+			if (deob != null) {
+				deob.Dispose();
+				deob = null;
+			}
+
 			GC.SuppressFinalize(this);
-		}
-
-		protected virtual void ModuleDispose(bool disposing) {
-			if (disposing) {
-				if (module != null) {
-					module.Dispose();
-					module = null;
-				}
-			}
-		}
-
-		protected virtual void DeobDispose(bool disposing) {
-			if (disposing) {
-				if (deob != null) {
-					deob.Dispose();
-					deob = null;
-				}
-			}
 		}
 
 	}
