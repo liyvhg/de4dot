@@ -445,7 +445,7 @@ namespace de4dot.code.deobfuscators.CodeFort {
 #endif
 				createdTypes[info.name] = type;
 			}
-#if NET472 || NETCORE
+#if NET472 || NETCOREAPP2_2
 			foreach (var info in typeInfos)
 				createdTypes[info.name] = typeBuilders[info.name].CreateType();
 #endif
