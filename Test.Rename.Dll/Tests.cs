@@ -1359,15 +1359,12 @@ namespace Test.Rename.Dll {
 		public class Global1 {
 			public class Global11 {
 				public class Global111 { }
-				public interface IGlobal111 { }
 				protected internal class Global112 { }
-				protected internal interface IGlobal112 { }
 				private class Local111 { }
 				private interface ILocal111 { }
 				internal class Local112 { }
 				internal interface ILocal112 { }
 			}
-			public interface IGlobal11 { }
 			private class Local11 { }
 			private interface ILocal11 { }
 		}
