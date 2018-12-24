@@ -26,12 +26,14 @@ namespace de4dot.blocks.cflow {
 		// We can't catch all infinite loops, so inline methods at most this many times
 		const int MAX_ITERATIONS = 10;
 
-		protected Blocks blocks;
-		protected Block block;
+		private Blocks blocks;
+		private Block block;
 		int iteration;
 		AccessChecker accessChecker;
 
 		public bool ExecuteIfNotModified { get; set; }
+		protected Blocks Blocks { get => blocks; set => blocks = value; }
+		protected Block Block { get => block; set => block = value; }
 
 		public void DeobfuscateBegin(Blocks blocks) {
 			this.blocks = blocks;
@@ -54,9 +56,12 @@ namespace de4dot.blocks.cflow {
 
 		protected class InstructionPatcher {
 			readonly int patchIndex;
-			public readonly int afterIndex;
+			private int afterIndex;
 			public readonly Instruction lastInstr;
 			readonly Instr clonedInstr;
+
+			public int AfterIndex { get => afterIndex; set => afterIndex = value; }
+
 			public InstructionPatcher(int patchIndex, int afterIndex, Instruction lastInstr) {
 				this.patchIndex = patchIndex;
 				this.afterIndex = afterIndex;
@@ -89,7 +94,7 @@ namespace de4dot.blocks.cflow {
 			if (patcher == null)
 				return false;
 
-			if (!IsReturn(methodToInline, patcher.afterIndex))
+			if (!IsReturn(methodToInline, patcher.AfterIndex))
 				return false;
 
 			patcher.Patch(block);

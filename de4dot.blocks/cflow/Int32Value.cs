@@ -27,9 +27,11 @@ namespace de4dot.blocks.cflow {
 
 		internal const uint NO_UNKNOWN_BITS = uint.MaxValue;
 		private int value1;
-		public readonly uint ValidMask;
-		
+		private uint validMask;
+
 		public int Value { get => value1; set => value1 = value; }
+
+		public uint ValidMask { get => validMask; set => validMask = value; }
 
 		public Int32Value(int value)
 			: base(ValueType.Int32) {
