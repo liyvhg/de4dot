@@ -234,7 +234,7 @@ namespace de4dot.code.deobfuscators.dotNET_Reactor.v4 {
 					dm.code = methodData;
 
 					var codeReader = peImage.Reader;
-					codeReader.Position = peImage.RvaToOffset(dm.mdRVA);
+					codeReader.Position = peImage.RvaToOffset(dm.MdRVA);
 					var mbHeader = MethodBodyParser.ParseMethodBody(ref codeReader, out var code, out dm.extraSections);
 					peImage.UpdateMethodHeaderInfo(dm, mbHeader);
 

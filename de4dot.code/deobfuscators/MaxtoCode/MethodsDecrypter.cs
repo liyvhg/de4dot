@@ -726,11 +726,11 @@ namespace de4dot.code.deobfuscators.MaxtoCode {
 				var dm = new DumpedMethod();
 				peImage.ReadMethodTableRowTo(dm, rid);
 
-				var info = methodInfos.Lookup(dm.mdRVA);
+				var info = methodInfos.Lookup(dm.MdRVA);
 				if (info == null)
 					continue;
 
-				ushort magic = peImage.ReadUInt16(dm.mdRVA);
+				ushort magic = peImage.ReadUInt16(dm.MdRVA);
 				if (magic != 0xFFF3)
 					continue;
 

@@ -23,33 +23,47 @@ namespace de4dot.blocks {
 	[Serializable]
 	public class DumpedMethod {
 		[NonSerialized]
-		public ushort mhFlags;          // method header Flags
+		private ushort mhFlags;          // method header Flags
 		[NonSerialized]
-		public ushort mhMaxStack;       // method header MaxStack
+		private ushort mhMaxStack;       // method header MaxStack
 		[NonSerialized]
-		public uint mhCodeSize;         // method header CodeSize
+		private uint mhCodeSize;         // method header CodeSize
 		[NonSerialized]
-		public uint mhLocalVarSigTok;   // method header LocalVarSigTok
+		private uint mhLocalVarSigTok;   // method header LocalVarSigTok
 
 		[NonSerialized]
-		public uint mdRVA;              // methodDef RVA
+		private uint mdRVA;              // methodDef RVA
 		[NonSerialized]
-		public ushort mdImplFlags;      // methodDef ImplFlags
+		private ushort mdImplFlags;      // methodDef ImplFlags
 		[NonSerialized]
-		public ushort mdFlags;          // methodDef Flags
+		private ushort mdFlags;          // methodDef Flags
 		[NonSerialized]
-		public uint mdName;             // methodDef Name (index into #String)
+		private uint mdName;             // methodDef Name (index into #String)
 		[NonSerialized]
-		public uint mdSignature;        // methodDef Signature (index into #Blob)
+		private uint mdSignature;        // methodDef Signature (index into #Blob)
 		[NonSerialized]
-		public uint mdParamList;        // methodDef ParamList (index into Param table)
+		private uint mdParamList;        // methodDef ParamList (index into Param table)
 
 		[NonSerialized]
-		public uint token;              // metadata token
+		private uint token;              // metadata token
 
 		[NonSerialized]
 		public byte[] code;
 		[NonSerialized]
 		public byte[] extraSections;
+
+		public ushort MhFlags { get => mhFlags; set => mhFlags = value; }
+		public ushort MhMaxStack { get => mhMaxStack; set => mhMaxStack = value; }
+		public uint MhCodeSize { get => mhCodeSize; set => mhCodeSize = value; }
+		public uint MhLocalVarSigTok { get => mhLocalVarSigTok; set => mhLocalVarSigTok = value; }
+		public uint MdRVA { get => mdRVA; set => mdRVA = value; }
+		public ushort MdImplFlags { get => mdImplFlags; set => mdImplFlags = value; }
+		public ushort MdFlags { get => mdFlags; set => mdFlags = value; }
+		public uint MdName { get => mdName; set => mdName = value; }
+		public uint MdSignature { get => mdSignature; set => mdSignature = value; }
+		public uint MdParamList { get => mdParamList; set => mdParamList = value; }
+		public uint Token { get => token; set => token = value; }
+		public byte[] Code { get => code; set => code = value; }
+		public byte[] ExtraSections { get => extraSections; set => extraSections = value; }
 	}
 }

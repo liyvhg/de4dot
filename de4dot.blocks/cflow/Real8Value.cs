@@ -21,8 +21,10 @@ using System.Globalization;
 
 namespace de4dot.blocks.cflow {
 	public class Real8Value : Value {
-		public readonly double Value;
+		private double value1;
 		public readonly bool IsValid;
+
+		public double Value { get => value1; set => value1 = value; }
 
 		public Real8Value(double value)
 			: base(ValueType.Real8) {

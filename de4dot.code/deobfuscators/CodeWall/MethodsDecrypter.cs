@@ -71,23 +71,23 @@ namespace de4dot.code.deobfuscators.CodeWall {
 				var dm = new DumpedMethod();
 				peImage.ReadMethodTableRowTo(dm, rid);
 
-				if (dm.mdRVA == 0)
+				if (dm.MdRVA == 0)
 					continue;
-				uint bodyOffset = peImage.RvaToOffset(dm.mdRVA);
+				uint bodyOffset = peImage.RvaToOffset(dm.MdRVA);
 
 				peImage.Reader.Position = bodyOffset;
 				var mbHeader = MethodBodyParser.ParseMethodBody(ref peImage.Reader, out dm.code, out dm.extraSections);
 				peImage.UpdateMethodHeaderInfo(dm, mbHeader);
 
-				if (dm.code.Length < 6 || dm.code[0] != 0x2A || dm.code[1] != 0x2A)
+				if (dm.Code.Length < 6 || dm.Code[0] != 0x2A || dm.Code[1] != 0x2A)
 					continue;
 
-				int seed = BitConverter.ToInt32(dm.code, 2);
-				Array.Copy(newCodeHeader, dm.code, newCodeHeader.Length);
+				int seed = BitConverter.ToInt32(dm.Code, 2);
+				Array.Copy(newCodeHeader, dm.Code, newCodeHeader.Length);
 				if (seed == 0)
-					Decrypt(dm.code);
+					Decrypt(dm.Code);
 				else
-					Decrypt(dm.code, seed);
+					Decrypt(dm.Code, seed);
 
 				dumpedMethods.Add(dm);
 				decrypted = true;

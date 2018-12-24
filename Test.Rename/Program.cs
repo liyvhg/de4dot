@@ -24,6 +24,7 @@ namespace Test.Rename {
 				get { return 1; }
 			}
 			public override int Prop3 {
+				get { return 1; }
 				set { }
 			}
 			public override void meth1(int i) { }

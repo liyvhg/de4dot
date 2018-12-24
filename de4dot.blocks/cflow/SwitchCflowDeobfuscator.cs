@@ -153,7 +153,7 @@ namespace de4dot.blocks.cflow {
 			foreach (var source in new List<Block>(block.Sources)) {
 				if (!IsBranchBlock(source))
 					continue;
-				instructionEmulator.Initialize(blocks, allBlocks[0] == source);
+				instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
 				instructionEmulator.Emulate(source.Instructions);
 
 				var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.Pop());
@@ -178,7 +178,7 @@ namespace de4dot.blocks.cflow {
 			bool modified = false;
 			foreach (var source in new List<Block>(block.Sources)) {
 				if (IsBranchBlock(source)) {
-					instructionEmulator.Initialize(blocks, allBlocks[0] == source);
+					instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
 					instructionEmulator.Emulate(source.Instructions);
 
 					var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.GetLocal(switchVariable));
@@ -188,7 +188,7 @@ namespace de4dot.blocks.cflow {
 					modified = true;
 				}
 				else if (IsBccBlock(source)) {
-					instructionEmulator.Initialize(blocks, allBlocks[0] == source);
+					instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
 					instructionEmulator.Emulate(source.Instructions);
 
 					var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.GetLocal(switchVariable));
@@ -218,7 +218,7 @@ namespace de4dot.blocks.cflow {
 			foreach (var source in new List<Block>(block.Sources)) {
 				if (!IsBranchBlock(source))
 					continue;
-				instructionEmulator.Initialize(blocks, allBlocks[0] == source);
+				instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
 				instructionEmulator.Emulate(source.Instructions);
 
 				var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.Pop());
@@ -400,7 +400,7 @@ namespace de4dot.blocks.cflow {
 		}
 
 		bool EmulateGetTarget(Block switchBlock, out Block target) {
-			instructionEmulator.Initialize(blocks, allBlocks[0] == switchBlock);
+			instructionEmulator.Initialize(blocks, AllBlocks[0] == switchBlock);
 			try {
 				instructionEmulator.Emulate(switchBlock.Instructions, 0, switchBlock.Instructions.Count - 1);
 			}
@@ -414,7 +414,7 @@ namespace de4dot.blocks.cflow {
 		}
 
 		bool WillHaveKnownTarget(Block switchBlock, Block source) {
-			instructionEmulator.Initialize(blocks, allBlocks[0] == source);
+			instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
 			try {
 				instructionEmulator.Emulate(source.Instructions);
 				instructionEmulator.Emulate(switchBlock.Instructions, 0, switchBlock.Instructions.Count - 1);

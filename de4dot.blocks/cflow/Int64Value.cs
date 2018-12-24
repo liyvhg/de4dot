@@ -26,8 +26,12 @@ namespace de4dot.blocks.cflow {
 		public static readonly Int64Value One = new Int64Value(1);
 
 		internal const ulong NO_UNKNOWN_BITS = ulong.MaxValue;
-		public readonly long Value;
-		public readonly ulong ValidMask;
+		private long value1;
+		private ulong validMask;
+
+		public long Value { get => value1; set => value1 = value; }
+
+		public ulong ValidMask { get => validMask; set => validMask = value; } 
 
 		public Int64Value(long value)
 			: base(ValueType.Int64) {

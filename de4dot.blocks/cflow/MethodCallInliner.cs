@@ -23,7 +23,9 @@ using dnlib.DotNet.Emit;
 
 namespace de4dot.blocks.cflow {
 	public class MethodCallInliner : MethodCallInlinerBase {
-		protected readonly bool inlineInstanceMethods;
+		private readonly bool inlineInstanceMethods;
+
+		protected bool InlineInstanceMethods => inlineInstanceMethods;
 
 		public MethodCallInliner(bool inlineInstanceMethods) => this.inlineInstanceMethods = inlineInstanceMethods;
 

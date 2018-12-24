@@ -38,9 +38,9 @@ namespace de4dot.blocks {
 		}
 
 		public void Add(DumpedMethod dm) {
-			if (MDToken.ToTable(dm.token) != Table.Method || MDToken.ToRID(dm.token) == 0)
+			if (MDToken.ToTable(dm.Token) != Table.Method || MDToken.ToRID(dm.Token) == 0)
 				throw new ArgumentException("Invalid token");
-			methods[dm.token] = dm;
+			methods[dm.Token] = dm;
 		}
 	}
 }

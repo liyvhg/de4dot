@@ -481,9 +481,9 @@ namespace de4dot.code.deobfuscators.Confuser {
 				var dm = new DumpedMethod();
 				peImage.ReadMethodTableRowTo(dm, rid);
 
-				if (dm.mdRVA == 0)
+				if (dm.MdRVA == 0)
 					continue;
-				uint bodyOffset = peImage.RvaToOffset(dm.mdRVA);
+				uint bodyOffset = peImage.RvaToOffset(dm.MdRVA);
 
 				if (!IsEncryptedMethod(fileData, (int)bodyOffset))
 					continue;
@@ -601,9 +601,9 @@ namespace de4dot.code.deobfuscators.Confuser {
 				var dm = new DumpedMethod();
 				peImage.ReadMethodTableRowTo(dm, rid);
 
-				if (dm.mdRVA == 0)
+				if (dm.MdRVA == 0)
 					continue;
-				uint bodyOffset = peImage.RvaToOffset(dm.mdRVA);
+				uint bodyOffset = peImage.RvaToOffset(dm.MdRVA);
 
 				if (!IsEncryptedMethod(fileData, (int)bodyOffset))
 					continue;
@@ -614,11 +614,11 @@ namespace de4dot.code.deobfuscators.Confuser {
 				int methodDataOffset = mdOffs + 2;
 				decrypter.Decrypt(methodsData, methodDataOffset, (uint)key, len, out var methodData, out var codeData);
 
-				dm.mhFlags = 0x03;
+				dm.MhFlags = 0x03;
 				int maxStack = (int)methodData[methodDataIndexes.maxStack];
-				dm.mhMaxStack = (ushort)maxStack;
-				dm.mhLocalVarSigTok = methodData[methodDataIndexes.localVarSigTok];
-				if (dm.mhLocalVarSigTok != 0 && (dm.mhLocalVarSigTok >> 24) != 0x11)
+				dm.MhMaxStack = (ushort)maxStack;
+				dm.MhLocalVarSigTok = methodData[methodDataIndexes.localVarSigTok];
+				if (dm.MhLocalVarSigTok != 0 && (dm.MhLocalVarSigTok >> 24) != 0x11)
 					throw new ApplicationException("Invalid local var sig token");
 				int numExceptions = (int)methodData[methodDataIndexes.ehs];
 				uint options = methodData[methodDataIndexes.options];
@@ -626,27 +626,27 @@ namespace de4dot.code.deobfuscators.Confuser {
 
 				var codeDataReader = ByteArrayDataReaderFactory.CreateReader(codeData);
 				if (decrypter.IsCodeFollowedByExtraSections(options)) {
-					dm.code = codeDataReader.ReadBytes(codeSize);
-					dm.extraSections = ReadExceptionHandlers(ref codeDataReader, numExceptions);
+					dm.Code = codeDataReader.ReadBytes(codeSize);
+					dm.ExtraSections = ReadExceptionHandlers(ref codeDataReader, numExceptions);
 				}
 				else {
-					dm.extraSections = ReadExceptionHandlers(ref codeDataReader, numExceptions);
-					dm.code = codeDataReader.ReadBytes(codeSize);
+					dm.ExtraSections = ReadExceptionHandlers(ref codeDataReader, numExceptions);
+					dm.Code = codeDataReader.ReadBytes(codeSize);
 				}
 				if (codeDataReader.Position != codeDataReader.Length)
 					throw new ApplicationException("Invalid method data");
-				if (dm.extraSections != null)
-					dm.mhFlags |= 8;
-				dm.mhCodeSize = (uint)dm.code.Length;
+				if (dm.ExtraSections != null)
+					dm.MhFlags |= 8;
+				dm.MhCodeSize = (uint)dm.Code.Length;
 
 				// Figure out if the original method was tiny or not.
-				bool isTiny = dm.code.Length <= 0x3F &&
-							dm.mhLocalVarSigTok == 0 &&
-							dm.extraSections == null &&
-							dm.mhMaxStack == 8;
+				bool isTiny = dm.Code.Length <= 0x3F &&
+							dm.MhLocalVarSigTok == 0 &&
+							dm.ExtraSections == null &&
+							dm.MhMaxStack == 8;
 				if (isTiny)
-					dm.mhFlags |= 0x10;	// Set 'init locals'
-				dm.mhFlags |= (ushort)(options & 0x10);	// copy 'init locals' bit
+					dm.MhFlags |= 0x10;	// Set 'init locals'
+				dm.MhFlags |= (ushort)(options & 0x10);	// copy 'init locals' bit
 
 				dumpedMethods.Add(dm);
 			}

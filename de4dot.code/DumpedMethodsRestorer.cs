@@ -45,7 +45,7 @@ namespace de4dot.code {
 				return false;
 			}
 			else {
-				row = new RawMethodRow(dm.mdRVA, dm.mdImplFlags, dm.mdFlags, dm.mdName, dm.mdSignature, dm.mdParamList);
+				row = new RawMethodRow(dm.MdRVA, dm.MdImplFlags, dm.MdFlags, dm.MdName, dm.MdSignature, dm.MdParamList);
 				return true;
 			}
 		}
@@ -68,7 +68,7 @@ namespace de4dot.code {
 				methodBody = null;
 				return false;
 			}
-			methodBody = MethodBodyReader.CreateCilBody(module, dm.code, dm.extraSections, parameters, dm.mhFlags, dm.mhMaxStack, dm.mhCodeSize, dm.mhLocalVarSigTok, gpContext);
+			methodBody = MethodBodyReader.CreateCilBody(module, dm.Code, dm.ExtraSections, parameters, dm.MhFlags, dm.MhMaxStack, dm.MhCodeSize, dm.MhLocalVarSigTok, gpContext);
 			return true;
 		}
 	}

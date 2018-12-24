@@ -38,7 +38,7 @@ namespace de4dot.blocks.cflow {
 		protected override bool Deobfuscate(Block block) {
 			bool modified = false;
 
-			instructionEmulator.Initialize(blocks, allBlocks[0] == block);
+			instructionEmulator.Initialize(blocks, AllBlocks[0] == block);
 			var instrs = block.Instructions;
 			for (int i = 0; i < instrs.Count; i++) {
 				var instr = instrs[i];

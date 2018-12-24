@@ -512,7 +512,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_U1(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_U1((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int32Value.Conv_U1((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int32Value.Conv_U1((Real8Value)val1)); break;
@@ -522,7 +522,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_I1(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_I1((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int32Value.Conv_I1((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int32Value.Conv_I1((Real8Value)val1)); break;
@@ -532,7 +532,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_U2(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_U2((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int32Value.Conv_U2((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int32Value.Conv_U2((Real8Value)val1)); break;
@@ -542,7 +542,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_I2(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_I2((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int32Value.Conv_I2((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int32Value.Conv_I2((Real8Value)val1)); break;
@@ -552,7 +552,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_U4(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_U4((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int32Value.Conv_U4((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int32Value.Conv_U4((Real8Value)val1)); break;
@@ -562,7 +562,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_I4(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_I4((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int32Value.Conv_I4((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int32Value.Conv_I4((Real8Value)val1)); break;
@@ -572,7 +572,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_U8(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int64Value.Conv_U8((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_U8((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int64Value.Conv_U8((Real8Value)val1)); break;
@@ -582,7 +582,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_I8(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int64Value.Conv_I8((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_I8((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Int64Value.Conv_I8((Real8Value)val1)); break;
@@ -592,7 +592,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I1(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I1((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I1((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I1((Real8Value)val1)); break;
@@ -602,7 +602,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I1_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I1_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I1_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I1_Un((Real8Value)val1)); break;
@@ -612,7 +612,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I2(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I2((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I2((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I2((Real8Value)val1)); break;
@@ -622,7 +622,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I2_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I2_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I2_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I2_Un((Real8Value)val1)); break;
@@ -632,7 +632,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I4(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I4((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I4((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I4((Real8Value)val1)); break;
@@ -642,7 +642,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I4_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I4_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I4_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I4_Un((Real8Value)val1)); break;
@@ -652,7 +652,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I8(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I8((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I8((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I8((Real8Value)val1)); break;
@@ -662,7 +662,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_I8_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_I8_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_I8_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_I8_Un((Real8Value)val1)); break;
@@ -672,7 +672,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U1(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U1((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U1((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U1((Real8Value)val1)); break;
@@ -682,7 +682,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U1_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U1_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U1_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U1_Un((Real8Value)val1)); break;
@@ -692,7 +692,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U2(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U2((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U2((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U2((Real8Value)val1)); break;
@@ -702,7 +702,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U2_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U2_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U2_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U2_Un((Real8Value)val1)); break;
@@ -712,7 +712,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U4(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U4((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U4((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U4((Real8Value)val1)); break;
@@ -722,7 +722,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U4_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U4_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U4_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U4_Un((Real8Value)val1)); break;
@@ -732,7 +732,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U8(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U8((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U8((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U8((Real8Value)val1)); break;
@@ -742,7 +742,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_Ovf_U8_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_Ovf_U8_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_Ovf_U8_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_Ovf_U8_Un((Real8Value)val1)); break;
@@ -752,7 +752,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_R_Un(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_R_Un((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_R_Un((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_R_Un((Real8Value)val1)); break;
@@ -762,7 +762,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_R4(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_R4((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_R4((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_R4((Real8Value)val1)); break;
@@ -772,7 +772,7 @@ namespace de4dot.blocks.cflow {
 
 		void Emulate_Conv_R8(Instruction instr) {
 			var val1 = valueStack.Pop();
-			switch (val1.valueType) {
+			switch (val1.ValueType) {
 			case ValueType.Int32:	valueStack.Push(Int32Value.Conv_R8((Int32Value)val1)); break;
 			case ValueType.Int64:	valueStack.Push(Int64Value.Conv_R8((Int64Value)val1)); break;
 			case ValueType.Real8:	valueStack.Push(Real8Value.Conv_R8((Real8Value)val1)); break;

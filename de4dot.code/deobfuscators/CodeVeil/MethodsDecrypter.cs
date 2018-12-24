@@ -41,10 +41,10 @@ namespace de4dot.code.deobfuscators.CodeVeil {
 					return false;	// Not a RET
 				methodsDataReader.Position = fileDataReader.ReadCompressedUInt32();
 
-				dm.mhCodeSize = methodsDataReader.ReadCompressedUInt32();
-				dm.code = methodsDataReader.ReadBytes((int)dm.mhCodeSize);
-				if ((dm.mhFlags & 8) != 0)
-					dm.extraSections = MethodBodyParser.ReadExtraSections(ref methodsDataReader);
+				dm.MhCodeSize = methodsDataReader.ReadCompressedUInt32();
+				dm.Code = methodsDataReader.ReadBytes((int)dm.MhCodeSize);
+				if ((dm.MhFlags & 8) != 0)
+					dm.ExtraSections = MethodBodyParser.ReadExtraSections(ref methodsDataReader);
 
 				if (!DecryptCode(dm))
 					return false;
@@ -68,7 +68,7 @@ namespace de4dot.code.deobfuscators.CodeVeil {
 			}
 
 			protected override bool DecryptCode(DumpedMethod dm) {
-				var code = dm.code;
+				var code = dm.Code;
 				for (int i = 0; i < code.Length; i++) {
 					for (int j = 0; j < 4 && i + j < code.Length; j++)
 						code[i + j] ^= decryptKey[j];
@@ -138,9 +138,9 @@ namespace de4dot.code.deobfuscators.CodeVeil {
 				var dm = new DumpedMethod();
 
 				peImage.ReadMethodTableRowTo(dm, rid);
-				if (dm.mdRVA == 0)
+				if (dm.MdRVA == 0)
 					continue;
-				uint bodyOffset = peImage.RvaToOffset(dm.mdRVA);
+				uint bodyOffset = peImage.RvaToOffset(dm.MdRVA);
 
 				byte b = peImage.OffsetReadByte(bodyOffset);
 				uint codeOffset;
@@ -148,19 +148,19 @@ namespace de4dot.code.deobfuscators.CodeVeil {
 					if (b != 2)
 						continue;	// not zero byte code size
 
-					dm.mhFlags = 2;
-					dm.mhMaxStack = 8;
-					dm.mhLocalVarSigTok = 0;
+					dm.MhFlags = 2;
+					dm.MhMaxStack = 8;
+					dm.MhLocalVarSigTok = 0;
 					codeOffset = bodyOffset + 1;
 				}
 				else {
 					if (peImage.OffsetReadUInt32(bodyOffset + 4) != 0)
 						continue;	// not zero byte code size
 
-					dm.mhFlags = peImage.OffsetReadUInt16(bodyOffset);
-					dm.mhMaxStack = peImage.OffsetReadUInt16(bodyOffset + 2);
-					dm.mhLocalVarSigTok = peImage.OffsetReadUInt32(bodyOffset + 8);
-					codeOffset = bodyOffset + (uint)(dm.mhFlags >> 12) * 4;
+					dm.MhFlags = peImage.OffsetReadUInt16(bodyOffset);
+					dm.MhMaxStack = peImage.OffsetReadUInt16(bodyOffset + 2);
+					dm.MhLocalVarSigTok = peImage.OffsetReadUInt32(bodyOffset + 8);
+					codeOffset = bodyOffset + (uint)(dm.MhFlags >> 12) * 4;
 				}
 				fileDataReader.Position = codeOffset;
 

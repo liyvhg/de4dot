@@ -68,22 +68,22 @@ namespace de4dot.code.deobfuscators {
 		}
 
 		public void ReadMethodTableRowTo(DumpedMethod dm, uint rid) {
-			dm.token = 0x06000000 + rid;
+			dm.Token = 0x06000000 + rid;
 			if (!Metadata.TablesStream.TryReadMethodRow(rid, out var row))
 				throw new ArgumentException("Invalid Method rid");
-			dm.mdRVA = row.RVA;
-			dm.mdImplFlags = row.ImplFlags;
-			dm.mdFlags = row.Flags;
-			dm.mdName = row.Name;
-			dm.mdSignature = row.Signature;
-			dm.mdParamList = row.ParamList;
+			dm.MdRVA = row.RVA;
+			dm.MdImplFlags = row.ImplFlags;
+			dm.MdFlags = row.Flags;
+			dm.MdName = row.Name;
+			dm.MdSignature = row.Signature;
+			dm.MdParamList = row.ParamList;
 		}
 
 		public void UpdateMethodHeaderInfo(DumpedMethod dm, MethodBodyHeader mbHeader) {
-			dm.mhFlags = mbHeader.flags;
-			dm.mhMaxStack = mbHeader.maxStack;
-			dm.mhCodeSize = dm.code == null ? 0 : (uint)dm.code.Length;
-			dm.mhLocalVarSigTok = mbHeader.localVarSigTok;
+			dm.MhFlags = mbHeader.flags;
+			dm.MhMaxStack = mbHeader.maxStack;
+			dm.MhCodeSize = dm.Code == null ? 0 : (uint)dm.Code.Length;
+			dm.MhLocalVarSigTok = mbHeader.localVarSigTok;
 		}
 
 		public uint RvaToOffset(uint rva) => (uint)peImage.ToFileOffset((RVA)rva);

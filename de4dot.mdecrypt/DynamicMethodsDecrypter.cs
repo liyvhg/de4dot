@@ -362,13 +362,13 @@ namespace de4dot.mdecrypt {
 			if (ourCompMem != IntPtr.Zero && comp == ourCompMem) {
 				// We're decrypting methods
 				var info2 = (CORINFO_METHOD_INFO*)info;
-				ctx.dm.code = new byte[info2->ILCodeSize];
+				ctx.dm.Code = new byte[info2->ILCodeSize];
 
-				Marshal.Copy(info2->ILCode, ctx.dm.code, 0, ctx.dm.code.Length);
-				ctx.dm.mhMaxStack = info2->maxStack;
-				ctx.dm.mhCodeSize = info2->ILCodeSize;
-				if ((ctx.dm.mhFlags & 8) != 0)
-					ctx.dm.extraSections = ReadExtraSections((byte*)info2->ILCode + info2->ILCodeSize);
+				Marshal.Copy(info2->ILCode, ctx.dm.Code, 0, ctx.dm.Code.Length);
+				ctx.dm.MhMaxStack = info2->maxStack;
+				ctx.dm.MhCodeSize = info2->ILCodeSize;
+				if ((ctx.dm.MhFlags & 8) != 0)
+					ctx.dm.ExtraSections = ReadExtraSections((byte*)info2->ILCode + info2->ILCodeSize);
 
 				UpdateFromMethodDefTableRow();
 
@@ -440,14 +440,14 @@ namespace de4dot.mdecrypt {
 		}
 
 		unsafe void UpdateFromMethodDefTableRow() {
-			uint methodIndex = ctx.dm.token - 0x06000001;
+			uint methodIndex = ctx.dm.Token - 0x06000001;
 			byte* row = (byte*)methodDefTablePtr + methodIndex * methodDefTable.RowSize;
-			ctx.dm.mdRVA = Read(row, methodDefTable.Columns[0]);
-			ctx.dm.mdImplFlags = (ushort)Read(row, methodDefTable.Columns[1]);
-			ctx.dm.mdFlags = (ushort)Read(row, methodDefTable.Columns[2]);
-			ctx.dm.mdName = Read(row, methodDefTable.Columns[3]);
-			ctx.dm.mdSignature = Read(row, methodDefTable.Columns[4]);
-			ctx.dm.mdParamList = Read(row, methodDefTable.Columns[5]);
+			ctx.dm.MdRVA = Read(row, methodDefTable.Columns[0]);
+			ctx.dm.MdImplFlags = (ushort)Read(row, methodDefTable.Columns[1]);
+			ctx.dm.MdFlags = (ushort)Read(row, methodDefTable.Columns[2]);
+			ctx.dm.MdName = Read(row, methodDefTable.Columns[3]);
+			ctx.dm.MdSignature = Read(row, methodDefTable.Columns[4]);
+			ctx.dm.MdParamList = Read(row, methodDefTable.Columns[5]);
 		}
 
 		static unsafe uint Read(byte* row, ColumnInfo colInfo) {
@@ -487,7 +487,7 @@ namespace de4dot.mdecrypt {
 
 			ctx = new DecryptContext();
 			ctx.dm = new DumpedMethod();
-			ctx.dm.token = token;
+			ctx.dm.Token = token;
 
 			ctx.method = dnlibModule.ResolveMethod(MDToken.ToRID(token));
 			if (ctx.method == null)
@@ -496,39 +496,39 @@ namespace de4dot.mdecrypt {
 			byte* mh = (byte*)hInstModule + (uint)ctx.method.RVA;
 			byte* code;
 			if (mh == (byte*)hInstModule) {
-				ctx.dm.mhMaxStack = 0;
-				ctx.dm.mhCodeSize = 0;
-				ctx.dm.mhFlags = 0;
-				ctx.dm.mhLocalVarSigTok = 0;
+				ctx.dm.MhMaxStack = 0;
+				ctx.dm.MhCodeSize = 0;
+				ctx.dm.MhFlags = 0;
+				ctx.dm.MhLocalVarSigTok = 0;
 				code = null;
 			}
 			else if ((*mh & 3) == 2) {
 				uint headerSize = 1;
-				ctx.dm.mhMaxStack = 8;
-				ctx.dm.mhCodeSize = (uint)(*mh >> 2);
-				ctx.dm.mhFlags = 2;
-				ctx.dm.mhLocalVarSigTok = 0;
+				ctx.dm.MhMaxStack = 8;
+				ctx.dm.MhCodeSize = (uint)(*mh >> 2);
+				ctx.dm.MhFlags = 2;
+				ctx.dm.MhLocalVarSigTok = 0;
 				code = mh + headerSize;
 			}
 			else {
 				uint headerSize = (uint)((mh[1] >> 4) * 4);
-				ctx.dm.mhMaxStack = *(ushort*)(mh + 2);
-				ctx.dm.mhCodeSize = *(uint*)(mh + 4);
-				ctx.dm.mhFlags = *(ushort*)mh;
-				ctx.dm.mhLocalVarSigTok = *(uint*)(mh + 8);
+				ctx.dm.MhMaxStack = *(ushort*)(mh + 2);
+				ctx.dm.MhCodeSize = *(uint*)(mh + 4);
+				ctx.dm.MhFlags = *(ushort*)mh;
+				ctx.dm.MhLocalVarSigTok = *(uint*)(mh + 8);
 				code = mh + headerSize;
 			}
 
 			CORINFO_METHOD_INFO cORINFO_METHOD_INFO = default;
 			CORINFO_METHOD_INFO info = cORINFO_METHOD_INFO;
 			info.ILCode = new IntPtr(code);
-			info.ILCodeSize = ctx.dm.mhCodeSize;
-			info.maxStack = ctx.dm.mhMaxStack;
+			info.ILCodeSize = ctx.dm.MhCodeSize;
+			info.maxStack = ctx.dm.MhMaxStack;
 			info.scope = moduleToDecryptScope;
 
 			InitializeOurComp();
 			if (code == null) {
-				ctx.dm.code = Array.Empty<byte>();
+				ctx.dm.Code = Array.Empty<byte>();
 				UpdateFromMethodDefTableRow();
 			}
 			else

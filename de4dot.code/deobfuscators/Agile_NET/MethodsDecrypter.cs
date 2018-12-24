@@ -527,9 +527,9 @@ namespace de4dot.code.deobfuscators.Agile_NET {
 					continue;
 
 				peImage.ReadMethodTableRowTo(dm, rid);
-				if (dm.mdRVA == 0)
+				if (dm.MdRVA == 0)
 					continue;
-				uint bodyOffset = peImage.RvaToOffset(dm.mdRVA);
+				uint bodyOffset = peImage.RvaToOffset(dm.MdRVA);
 
 				var mbHeader = decrypter.Decrypt(bodyOffset, out dm.code, out dm.extraSections);
 				peImage.UpdateMethodHeaderInfo(dm, mbHeader);
