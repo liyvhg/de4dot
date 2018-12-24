@@ -28,7 +28,7 @@ namespace de4dot.blocks.cflow {
 
 		protected override void Initialize(List<Block> allBlocks) {
 			base.Initialize(allBlocks);
-			locals = blocks.Locals;
+			locals = Blocks.Locals;
 		}
 
 		protected override bool Deobfuscate(Block block) {

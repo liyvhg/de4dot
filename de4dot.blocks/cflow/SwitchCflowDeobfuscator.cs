@@ -64,7 +64,7 @@ namespace de4dot.blocks.cflow {
 			foreach (var instr in switchBlock.Instructions) {
 				if (!instr.IsLdloc())
 					continue;
-				local = Instr.GetLocalVar(blocks.Locals, instr);
+				local = Instr.GetLocalVar(Blocks.Locals, instr);
 				break;
 			}
 			if (local == null)
@@ -79,7 +79,7 @@ namespace de4dot.blocks.cflow {
 					var stloc = instrs[i];
 					if (!stloc.IsStloc())
 						continue;
-					if (Instr.GetLocalVar(blocks.Locals, stloc) != local)
+					if (Instr.GetLocalVar(Blocks.Locals, stloc) != local)
 						continue;
 
 					return true;
@@ -94,7 +94,7 @@ namespace de4dot.blocks.cflow {
 			return switchBlock.Instructions.Count == numInstrs &&
 				switchBlock.Instructions[0].IsStloc() &&
 				switchBlock.Instructions[1].IsLdloc() &&
-				Instr.GetLocalVar(blocks.Locals, switchBlock.Instructions[0]) == Instr.GetLocalVar(blocks.Locals, switchBlock.Instructions[1]);
+				Instr.GetLocalVar(Blocks.Locals, switchBlock.Instructions[0]) == Instr.GetLocalVar(Blocks.Locals, switchBlock.Instructions[1]);
 		}
 
 		bool DeobfuscateTOS(Block switchBlock) {
@@ -111,7 +111,7 @@ namespace de4dot.blocks.cflow {
 		bool DeobfuscateLdloc(Block switchBlock) {
 			bool modified = false;
 
-			var switchVariable = Instr.GetLocalVar(blocks.Locals, switchBlock.Instructions[0]);
+			var switchVariable = Instr.GetLocalVar(Blocks.Locals, switchBlock.Instructions[0]);
 			if (switchVariable == null)
 				return modified;
 
@@ -127,7 +127,7 @@ namespace de4dot.blocks.cflow {
 		bool DeobfuscateStLdloc(Block switchBlock) {
 			bool modified = false;
 
-			var switchVariable = Instr.GetLocalVar(blocks.Locals, switchBlock.Instructions[0]);
+			var switchVariable = Instr.GetLocalVar(Blocks.Locals, switchBlock.Instructions[0]);
 			if (switchVariable == null)
 				return modified;
 
@@ -153,7 +153,7 @@ namespace de4dot.blocks.cflow {
 			foreach (var source in new List<Block>(block.Sources)) {
 				if (!IsBranchBlock(source))
 					continue;
-				instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
+				instructionEmulator.Initialize(Blocks, AllBlocks[0] == source);
 				instructionEmulator.Emulate(source.Instructions);
 
 				var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.Pop());
@@ -178,7 +178,7 @@ namespace de4dot.blocks.cflow {
 			bool modified = false;
 			foreach (var source in new List<Block>(block.Sources)) {
 				if (IsBranchBlock(source)) {
-					instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
+					instructionEmulator.Initialize(Blocks, AllBlocks[0] == source);
 					instructionEmulator.Emulate(source.Instructions);
 
 					var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.GetLocal(switchVariable));
@@ -188,7 +188,7 @@ namespace de4dot.blocks.cflow {
 					modified = true;
 				}
 				else if (IsBccBlock(source)) {
-					instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
+					instructionEmulator.Initialize(Blocks, AllBlocks[0] == source);
 					instructionEmulator.Emulate(source.Instructions);
 
 					var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.GetLocal(switchVariable));
@@ -218,7 +218,7 @@ namespace de4dot.blocks.cflow {
 			foreach (var source in new List<Block>(block.Sources)) {
 				if (!IsBranchBlock(source))
 					continue;
-				instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
+				instructionEmulator.Initialize(Blocks, AllBlocks[0] == source);
 				instructionEmulator.Emulate(source.Instructions);
 
 				var target = GetSwitchTarget(switchTargets, switchFallThrough, instructionEmulator.Pop());
@@ -242,7 +242,7 @@ namespace de4dot.blocks.cflow {
 		//		br swblk
 		bool DeobfuscateTos_Ldloc(IList<Block> switchTargets, Block switchFallThrough, Block block) {
 			if (IsLdlocBranch(block, false)) {
-				var switchVariable = Instr.GetLocalVar(blocks.Locals, block.Instructions[0]);
+				var switchVariable = Instr.GetLocalVar(Blocks.Locals, block.Instructions[0]);
 				if (switchVariable == null)
 					return false;
 				return DeobfuscateLdloc(switchTargets, switchFallThrough, block, switchVariable);
@@ -377,7 +377,7 @@ namespace de4dot.blocks.cflow {
 			for (int i = 0; i < instrs.Count; i++) {
 				var instr = instrs[i];
 				if (instr.IsStloc()) {
-					var local = Instr.GetLocalVar(blocks.Locals, instr);
+					var local = Instr.GetLocalVar(Blocks.Locals, instr);
 					if (local == null)
 						continue;
 					var ldci4 = i == 0 ? null : instrs[i - 1];
@@ -387,7 +387,7 @@ namespace de4dot.blocks.cflow {
 						dict[local] = ldci4.GetLdcI4Value();
 				}
 				else if (instr.IsLdloc()) {
-					var local = Instr.GetLocalVar(blocks.Locals, instr);
+					var local = Instr.GetLocalVar(Blocks.Locals, instr);
 					if (local != null)
 						dict.Remove(local);
 				}
@@ -400,7 +400,7 @@ namespace de4dot.blocks.cflow {
 		}
 
 		bool EmulateGetTarget(Block switchBlock, out Block target) {
-			instructionEmulator.Initialize(blocks, AllBlocks[0] == switchBlock);
+			instructionEmulator.Initialize(Blocks, AllBlocks[0] == switchBlock);
 			try {
 				instructionEmulator.Emulate(switchBlock.Instructions, 0, switchBlock.Instructions.Count - 1);
 			}
@@ -414,7 +414,7 @@ namespace de4dot.blocks.cflow {
 		}
 
 		bool WillHaveKnownTarget(Block switchBlock, Block source) {
-			instructionEmulator.Initialize(blocks, AllBlocks[0] == source);
+			instructionEmulator.Initialize(Blocks, AllBlocks[0] == source);
 			try {
 				instructionEmulator.Emulate(source.Instructions);
 				instructionEmulator.Emulate(switchBlock.Instructions, 0, switchBlock.Instructions.Count - 1);

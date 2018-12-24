@@ -38,7 +38,7 @@ namespace de4dot.code.deobfuscators.DeepSea {
 		protected override bool DeobfuscateInternal() {
 			bool modified = false;
 
-			var instructions = block.Instructions;
+			var instructions = Block.Instructions;
 			for (int i = 0; i < instructions.Count; i++) {
 				var instr = instructions[i].Instruction;
 				if (instr.OpCode.Code == Code.Call)
@@ -61,8 +61,8 @@ namespace de4dot.code.deobfuscators.DeepSea {
 
 			if (instrIndex < 2)
 				return false;
-			var ldci4_1st = block.Instructions[instrIndex - 2];
-			var ldci4_2nd = block.Instructions[instrIndex - 1];
+			var ldci4_1st = Block.Instructions[instrIndex - 2];
+			var ldci4_2nd = Block.Instructions[instrIndex - 1];
 			if (!ldci4_1st.IsLdcI4() || !ldci4_2nd.IsLdcI4())
 				return false;
 
@@ -104,11 +104,11 @@ namespace de4dot.code.deobfuscators.DeepSea {
 			var patcher = TryInlineOtherMethod(instrIndex, methodToInline, methodToInline.Body.Instructions[index], index + 1, 2);
 			if (patcher == null)
 				return false;
-			if (!EmulateToReturn(patcher.afterIndex, patcher.lastInstr))
+			if (!EmulateToReturn(patcher.AfterIndex, patcher.lastInstr))
 				return false;
-			patcher.Patch(block);
-			block.Insert(instrIndex, OpCodes.Pop.ToInstruction());
-			block.Insert(instrIndex, OpCodes.Pop.ToInstruction());
+			patcher.Patch(Block);
+			Block.Insert(instrIndex, OpCodes.Pop.ToInstruction());
+			Block.Insert(instrIndex, OpCodes.Pop.ToInstruction());
 			return true;
 		}
 

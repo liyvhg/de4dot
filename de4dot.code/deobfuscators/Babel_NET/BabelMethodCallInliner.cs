@@ -73,7 +73,7 @@ namespace de4dot.code.deobfuscators.Babel_NET {
 
 		protected override bool DeobfuscateInternal() {
 			bool modified = false;
-			var instructions = block.Instructions;
+			var instructions = Block.Instructions;
 			for (int i = 0; i < instructions.Count; i++) {
 				var instr = instructions[i].Instruction;
 				if (instr.OpCode.Code == Code.Call)
@@ -94,7 +94,7 @@ namespace de4dot.code.deobfuscators.Babel_NET {
 			return method.IsStatic;
 		}
 
-		bool CanInline2(MethodDef method) => CanInline(method) && method != blocks.Method;
+		bool CanInline2(MethodDef method) => CanInline(method) && method != Blocks.Method;
 
 		bool InlineMethod(Instruction callInstr, int instrIndex) {
 			var methodToInline = callInstr.Operand as MethodDef;
@@ -110,14 +110,14 @@ namespace de4dot.code.deobfuscators.Babel_NET {
 			if (instrIndex == 0)
 				return false;
 
-			var ldci4 = block.Instructions[instrIndex - 1];
+			var ldci4 = Block.Instructions[instrIndex - 1];
 			if (!ldci4.IsLdcI4())
 				return false;
 			if (!GetNewValue(methodToInline, ldci4.GetLdcI4Value(), out int newValue))
 				return false;
 
-			block.Instructions[instrIndex - 1] = new Instr(OpCodes.Nop.ToInstruction());
-			block.Instructions[instrIndex] = new Instr(Instruction.CreateLdcI4(newValue));
+			Block.Instructions[instrIndex - 1] = new Instr(OpCodes.Nop.ToInstruction());
+			Block.Instructions[instrIndex] = new Instr(Instruction.CreateLdcI4(newValue));
 			return true;
 		}
 

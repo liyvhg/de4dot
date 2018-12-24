@@ -25,12 +25,12 @@ using de4dot.blocks;
 
 namespace de4dot.code {
 	// A simple class that statically detects the values of some local variables
-	public class VariableValues {
+	internal class VariableValues {
 		IList<Block> allBlocks;
 		IList<Local> locals;
 		Dictionary<Local, Variable> variableToValue = new Dictionary<Local, Variable>();
 
-		public class Variable {
+		internal class Variable {
 			int writes = 0;
 			object value;
 			bool unknownValue = false;

@@ -31,7 +31,7 @@ namespace de4dot.blocks.cflow {
 
 		protected override bool DeobfuscateInternal() {
 			bool modified = false;
-			var instructions = block.Instructions;
+			var instructions = Block.Instructions;
 			for (int i = 0; i < instructions.Count; i++) {
 				var instr = instructions[i].Instruction;
 				if (instr.OpCode.Code == Code.Call)
@@ -43,9 +43,9 @@ namespace de4dot.blocks.cflow {
 		protected virtual bool CanInline(MethodDef method) {
 			if (method.GenericParameters.Count > 0)
 				return false;
-			if (method == blocks.Method)
+			if (method == Blocks.Method)
 				return false;
-			if (!new SigComparer().Equals(method.DeclaringType, blocks.Method.DeclaringType))
+			if (!new SigComparer().Equals(method.DeclaringType, Blocks.Method.DeclaringType))
 				return false;
 
 			if (method.IsStatic)

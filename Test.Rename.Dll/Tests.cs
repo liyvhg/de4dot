@@ -1357,7 +1357,7 @@ namespace Test.Rename.Dll {
 
 	namespace test.Class.names {
 		public class Global1 {
-			public class Global11 {
+			private class Global11 {
 				public class Global111 { }
 				protected internal class Global112 { }
 				private class Local111 { }

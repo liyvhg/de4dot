@@ -32,13 +32,13 @@ namespace de4dot.blocks.cflow {
 
 		protected override void Initialize(List<Block> allBlocks) {
 			base.Initialize(allBlocks);
-			args = blocks.Method.Parameters;
+			args = Blocks.Method.Parameters;
 		}
 
 		protected override bool Deobfuscate(Block block) {
 			bool modified = false;
 
-			instructionEmulator.Initialize(blocks, AllBlocks[0] == block);
+			instructionEmulator.Initialize(Blocks, AllBlocks[0] == block);
 			var instrs = block.Instructions;
 			for (int i = 0; i < instrs.Count; i++) {
 				var instr = instrs[i];
@@ -59,7 +59,7 @@ namespace de4dot.blocks.cflow {
 				case Code.Ldloc_2:
 				case Code.Ldloc_3:
 				case Code.Ldloc_S:
-					modified |= FixLoadInstruction(block, i, instructionEmulator.GetLocal(instr.Instruction.GetLocal(blocks.Locals)));
+					modified |= FixLoadInstruction(block, i, instructionEmulator.GetLocal(instr.Instruction.GetLocal(Blocks.Locals)));
 					break;
 
 				case Code.Ldarga:
