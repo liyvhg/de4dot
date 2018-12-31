@@ -67,8 +67,6 @@ namespace de4dot.code.deobfuscators {
 			return true;
 		}
 
-		public static byte[] Md5Sum(byte[] data) => MD5.Create().ComputeHash(data);
-		public static byte[] Sha1Sum(byte[] data) => SHA1.Create().ComputeHash(data);
 		public static byte[] Sha256Sum(byte[] data) => SHA256.Create().ComputeHash(data);
 
 		public static byte[] AesDecrypt(byte[] data, byte[] key, byte[] iv) {
@@ -83,14 +81,6 @@ namespace de4dot.code.deobfuscators {
 			using (var des3 = TripleDES.Create()) {
 				using (var transform = des3.CreateDecryptor(key, iv)) {
 					return transform.TransformFinalBlock(data, 0, data.Length);
-				}
-			}
-		}
-
-		public static byte[] DesDecrypt(byte[] data, int start, int len, byte[] key, byte[] iv) {
-			using (var des = new DESCryptoServiceProvider()) {
-				using (var transform = des.CreateDecryptor(key, iv)) {
-					return transform.TransformFinalBlock(data, start, len);
 				}
 			}
 		}
