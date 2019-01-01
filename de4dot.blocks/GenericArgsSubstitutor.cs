@@ -281,7 +281,7 @@ namespace de4dot.blocks {
 		MethodSig Create(MethodSig sig) {
 			if (sig == null)
 				return sig;
-			var newSig = new MethodSig(sig.GetCallingConvention());
+			var newSig = new MethodSig(sig.GettingCallingConvention());
 			newSig.RetType = Create2(sig.RetType);
 			for (int i = 0; i < sig.Params.Count; i++)
 				newSig.Params.Add(Create2(sig.Params[i]));
