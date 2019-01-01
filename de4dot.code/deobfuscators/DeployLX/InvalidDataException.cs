@@ -17,14 +17,19 @@
     along with de4dot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using dnlib.DotNet;
-using de4dot.blocks.cflow;
+using System;
 
-namespace de4dot.code.deobfuscators.CodeFort {
-	class CfMethodCallInliner : MethodCallInliner {
-		ProxyCallFixer proxyCallFixer;
-		public CfMethodCallInliner(ProxyCallFixer proxyCallFixer) : base(false) => this.proxyCallFixer = proxyCallFixer;
-		protected override bool CanInline(MethodDef method) => proxyCallFixer.IsProxyTargetMethod(method);
-		protected override bool IsCompatibleType(int paramIndex, IType origType, IType newType) => true;
+namespace de4dot.code.deobfuscators.DeployLX {
+	[Serializable]
+	class InvalidDataException : Exception {
+		public InvalidDataException(string msg)
+			: base(msg) {
+		}
+
+		public InvalidDataException() {
+		}
+
+		public InvalidDataException(string message, Exception innerException) : base(message, innerException) {
+		}
 	}
 }

@@ -24,7 +24,7 @@ using System.Runtime.Serialization;
 using dnlib.DotNet;
 using dnlib.DotNet.Resources;
 
-namespace de4dot.code.deobfuscators.CodeVeil {
+namespace de4dot.code.deobfuscators.DeployLX {
 	class ResourceConverter {
 		ModuleDefMD module;
 		ResourceInfo[] infos;

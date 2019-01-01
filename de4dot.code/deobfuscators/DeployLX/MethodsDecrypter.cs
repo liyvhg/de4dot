@@ -21,7 +21,7 @@ using System;
 using dnlib.IO;
 using de4dot.blocks;
 
-namespace de4dot.code.deobfuscators.CodeVeil {
+namespace de4dot.code.deobfuscators.DeployLX {
 	class MethodsDecrypter {
 		MainType mainType;
 		IDecrypter decrypter;

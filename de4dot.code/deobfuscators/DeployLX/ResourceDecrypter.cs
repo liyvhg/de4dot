@@ -23,7 +23,7 @@ using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using de4dot.blocks;
 
-namespace de4dot.code.deobfuscators.CodeVeil {
+namespace de4dot.code.deobfuscators.DeployLX {
 	class ResourceDecrypter {
 		ModuleDefMD module;
 		TypeDef encryptedResourceStreamType;

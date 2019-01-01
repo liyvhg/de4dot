@@ -20,7 +20,7 @@
 using System.Collections.Generic;
 using dnlib.DotNet;
 
-namespace de4dot.code.deobfuscators.CodeVeil {
+namespace de4dot.code.deobfuscators.DeployLX {
 	class InvalidMethodsFinder {
 		public static List<MethodDef> FindAll(ModuleDefMD module) {
 			var list = new List<MethodDef>();
