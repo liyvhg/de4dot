@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dnlib" Version="3.1.0" />
     <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.6.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -29,7 +30,6 @@
   <ItemGroup>
     <ProjectReference Include="..\de4dot.blocks\de4dot.blocks.csproj" />
     <ProjectReference Include="..\de4dot.code\de4dot.code.csproj" />
-    <ProjectReference Include="..\dnlib\src\dnlib.csproj" />
   </ItemGroup>
 
 </Project>
