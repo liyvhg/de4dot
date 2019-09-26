@@ -1,0 +1,94 @@
+# https://www.appveyor.com/docs/appveyor-yml/
+# https://ci.appveyor.com/project/0xd4d/de4dot
+# https://github.com/joaope/LocalAppVeyor/blob/master/appveyor.yml
+
+version: 1.0.{build}
+
+branches:
+  only:
+    - master
+
+skip_tags: true
+
+image:
+  - Visual Studio 2019
+#  - Ubuntu
+
+init:
+  - dotnet --info
+
+environment:
+  APPVEYOR_YML_DISABLE_PS_LINUX: true
+
+configuration: Release
+
+install:
+  - git submodule update --init --recursive
+
+for:
+#-
+#  matrix:
+#    only:
+#      - image: Ubuntu
+#  install:
+#    - git submodule update --init --recursive
+#    - wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+#    - sudo dpkg -i packages-microsoft-prod.deb
+#    - sudo apt-get --yes --allow-unauthenticated install apt-transport-https
+#    - sudo apt-get update
+#    - sudo apt-get --yes --allow-unauthenticated install dotnet-sdk-2.2
+#    - dotnet --info
+#    - mono --version
+#    - echo "deb http://download.mono-project.com/repo/ubuntu nightly-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-nightly.list
+#    - sudo apt-get update
+#    - sudo apt-get --yes --allow-unauthenticated upgrade mono-complete
+#    - mono --version
+
+#  build_script:
+#  - sh: ./build.sh
+
+-
+  matrix:
+    only:
+      - image: Visual Studio 2019
+  install:
+    - git submodule update --init --recursive
+  build_script:
+  - ps: .\build.ps1
+
+test: off
+
+artifacts:
+
+  - path: Release/publish-netcoreapp2.2
+    name: de4dot-netcoreapp2.2
+  - path: Release/net48
+    name: de4dot-net48
+
+# Build cache
+#cache:
+#  - tools -> build.cake
+#  - packages -> build.cake
+
+#deploy:
+
+#  - provider: GitHub
+#    artifact: /de4dot-*
+#    draft: false
+#    prerelease: false
+#    on:
+#      branch: master
+#      appveyor_repo_tag: true
+#      configuration: release
+#    skip_symbols: true
+
+notifications:
+
+  - provider: Email
+    to:
+      - wangtianjiao.wang959@gmail.com
+    subject: 'Build {{status}}'
+    message: "{{message}}, {{commitId}}, ..."
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
