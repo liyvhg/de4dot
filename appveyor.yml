@@ -11,7 +11,7 @@ branches:
 skip_tags: true
 
 image:
-  - Visual Studio 2017
+  - Visual Studio 2019
   - Ubuntu
 
 init:
@@ -50,7 +50,7 @@ for:
 -
   matrix:
     only:
-      - image: Visual Studio 2017
+      - image: Visual Studio 2019
   install:
     - git submodule update --init --recursive
   build_script:
@@ -62,8 +62,8 @@ artifacts:
 
   - path: Release/publish-netcoreapp2.2
     name: de4dot-netcoreapp2.2
-  - path: Release/net472
-    name: de4dot-net472
+  - path: Release/net48
+    name: de4dot-net48
 
 # Build cache
 cache:
