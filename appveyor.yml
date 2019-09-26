@@ -26,26 +26,26 @@ install:
   - git submodule update --init --recursive
 
 for:
--
-  matrix:
-    only:
-      - image: Ubuntu
-  install:
-    - git submodule update --init --recursive
+#-
+#  matrix:
+#    only:
+#      - image: Ubuntu
+#  install:
+#    - git submodule update --init --recursive
 #    - wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
 #    - sudo dpkg -i packages-microsoft-prod.deb
 #    - sudo apt-get --yes --allow-unauthenticated install apt-transport-https
 #    - sudo apt-get update
 #    - sudo apt-get --yes --allow-unauthenticated install dotnet-sdk-2.2
-    - dotnet --info
-    - mono --version
-    - echo "deb http://download.mono-project.com/repo/ubuntu nightly-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-nightly.list
-    - sudo apt-get update
-    - sudo apt-get --yes --allow-unauthenticated upgrade mono-complete
-    - mono --version
+#    - dotnet --info
+#    - mono --version
+#    - echo "deb http://download.mono-project.com/repo/ubuntu nightly-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-nightly.list
+#    - sudo apt-get update
+#    - sudo apt-get --yes --allow-unauthenticated upgrade mono-complete
+#    - mono --version
 
-  build_script:
-  - sh: ./build.sh
+#  build_script:
+#  - sh: ./build.sh
 
 -
   matrix:
