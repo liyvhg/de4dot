@@ -38,7 +38,7 @@ jobs:
     vmImage: 'windows-2019'
   steps:
   - script: |
-      echo hello from Windows
+      echo hello  from Windows
       git submodule update --init --recursive
       choco install dotnetcore-sdk --ignore-dependencies
       dotnet --info
