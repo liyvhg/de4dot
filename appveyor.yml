@@ -66,9 +66,9 @@ artifacts:
     name: de4dot-net48
 
 # Build cache
-cache:
-  - tools -> build.cake
-  - packages -> build.cake
+#cache:
+#  - tools -> build.cake
+#  - packages -> build.cake
 
 #deploy:
 
