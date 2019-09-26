@@ -12,7 +12,7 @@ jobs:
       echo hello from Linux
       git submodule update --init --recursive
       mono --version
-      echo "deb http://download.mono-project.com/repo/ubuntu beta-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-beta.list
+      echo "deb http://download.mono-project.com/repo/ubuntu nightly-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-nightly.list
       sudo apt-get update
       sudo apt-get --yes --allow-unauthenticated upgrade mono-complete
       mono --version
@@ -27,7 +27,7 @@ jobs:
       echo hello from macOS
       git submodule update --init --recursive
       mono --version
-      wget --retry-connrefused --waitretry=1 -O /tmp/mdk.pkg http://download.mono-project.com/archive/mdk-latest.pkg
+      wget --retry-connrefused --waitretry=1 -O /tmp/mdk.pkg https://download.mono-project.com/archive/nightly/macos-10-universal/MonoFramework-MDK-master@7e6d863686a-dirty-6.7.0.759.macos10.xamarin.universal.pkg
       sudo installer -pkg /tmp/mdk.pkg -target /
       mono --version
       dotnet --info
@@ -35,7 +35,7 @@ jobs:
 
 - job: Windows
   pool:
-    vmImage: 'vs2019-win2019'
+    vmImage: 'windows-2019'
   steps:
   - script: |
       echo hello from Windows

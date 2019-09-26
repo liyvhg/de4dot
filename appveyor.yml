@@ -39,7 +39,7 @@ for:
 #    - sudo apt-get --yes --allow-unauthenticated install dotnet-sdk-2.2
     - dotnet --info
     - mono --version
-    - echo "deb http://download.mono-project.com/repo/ubuntu beta-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-beta.list
+    - echo "deb http://download.mono-project.com/repo/ubuntu nightly-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-nightly.list
     - sudo apt-get update
     - sudo apt-get --yes --allow-unauthenticated upgrade mono-complete
     - mono --version
