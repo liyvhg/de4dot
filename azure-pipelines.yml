@@ -12,6 +12,10 @@ jobs:
       echo hello from Linux
       git submodule update --init --recursive
       mono --version
+      echo "deb http://download.mono-project.com/repo/ubuntu beta-xenial main" | sudo tee /etc/apt/sources.list.d/mono-xamarin-beta.list
+      sudo apt-get update
+      sudo apt-get --yes --allow-unauthenticated upgrade mono-complete
+      mono --version
       dotnet --info
       ./build.sh
 
