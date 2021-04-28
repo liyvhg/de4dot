@@ -1,4 +1,4 @@
-// #tool nuget:?package=NUnit.ConsoleRunner&version=3.4.0
+
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -13,7 +13,7 @@ var configuration = Argument("configuration", "Release");
 // Define directories.
 var buildDir = Directory("./") + Directory(configuration);
 var netCoreVer = "netcoreapp2.2";
-var netFrameworkVer = "net472";
+var netFrameworkVer = "net48";
 
 var msBuildSettings = new MSBuildSettings()
     {

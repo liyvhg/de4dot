@@ -4,6 +4,9 @@ Read it before
 
 [致中国区用户的一封信](致中国区用户的一封信.md)
 
+## Donation
+[![Donatecoins](http://donatecoins.org/btc/38sio1bqo4NGCvyppFYDL5nNHvDbEJTNU5.svg)](http://donatecoins.org/btc/38sio1bqo4NGCvyppFYDL5nNHvDbEJTNU5)
+
 ## Build status
 
 | Build server | Platform     | Build status                                                                                                                                  |
